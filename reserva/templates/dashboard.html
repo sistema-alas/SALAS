@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block nav_custom %}
+<li class="nav-item">
+    <a class="nav-link fw-medium {% if request.resolver_match.url_name == 'index' %}active{% endif %}"
+        aria-current="page" href="{% url 'index' %}">Home</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link fw-medium {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}"
+        aria-current="page" href="{% url 'dashboard' %}">Dashboard</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link fw-medium"
+        aria-current="page" href="{% url 'admin:index' %}">Administração de Dados</a>
+</li>
+{% endblock %}
+
+{% block content %}
+<div data-bs-spy="scroll" class="scrollspy-example">
+    <section id="landingFunFacts" class="section-py landing-fun-facts">
+        <div class="container">
+            <div class="row d-flex justify-content-center" style="margin-top: 60px;">
+                <div class="text-center mb-4">
+                    <h1>Dashboard Admin</h1>
+
+                    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                    <script type="text/javascript">
+                        google.charts.load("current", { packages: ["corechart"] });
+                        google.charts.setOnLoadCallback(drawChart);
+
+                        function drawChart() {
+                            var data = google.visualization.arrayToDataTable([
+                                ['Espaço', 'Número de Reservas'],
+                                {% for nome, value in data_zip %}
+                        ['{{ nome }}', {{ value }}] {% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                            ]);
+
+                        var options = {
+                            title: 'Reservas por Laboratório',
+                            is3D: true,
+                        };
+
+                        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+                        chart.draw(data, options);
+                        }
+                    </script>
+
+                    <div class="d-flex justify-content-center  mt-10">
+                        <div class="col-lg-3 col-6">
+                            <!-- small box -->
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3>{{ users.id__count }}</h3>
+
+                                    <p>Usuários Registrados</p>
+                                </div>
+                                <div class="icon">
+                                    <ion-icon name="people" size="large"></ion-icon>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-6">
+                            <!-- small box -->
+                            <div class="small-box bg-success">
+                                <div class="inner">
+                                    <h3>{{ reservas_ativas|length }}</h3>
+
+                                    <p>Reservas Ativas</p>
+                                </div>
+                                <div class="icon">
+                                    <ion-icon name="checkmark-circle" size="large"></ion-icon>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-6">
+                            <!-- small box -->
+                            <div class="small-box bg-danger">
+                                <div class="inner">
+                                    <h3>{{ reservas_inativas|length }}</h3>
+
+                                    <p>Reservas Inativas</p>
+                                </div>
+                                <div class="icon">
+                                    <ion-icon name="close-circle" size="large"></ion-icon>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="d-flex mt-10">
+                        <div id="piechart_3d" style="width: 80%; height: 500px;" class="container">
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Reservas por servidor</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body p-0">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 10px">#</th>
+                                            <th>Servidor</th>
+                                            <th>Reservas</th>
+                                            <th style="width: 40px">%</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for servidor in servidores_reservas %}
+                                        <tr>
+                                            <td>{{ servidor.id }}</td>
+                                            <td>{{ servidor.nome }}</td>
+                                            <td>
+                                                <span class="badge bg-success">{{ servidor.num_reservas }}</span>
+                                            </td>
+                                            <td>
+                                                <span class="badge bg-success">{{ servidor.percentual_reservas|floatformat:2 }} %</span>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+    </section>
+</div>
+{% endblock %}

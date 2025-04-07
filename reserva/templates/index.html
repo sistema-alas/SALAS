@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div data-bs-spy="scroll" class="scrollspy-example">
+    <section id="landingFunFacts" class="section-py landing-fun-facts">
+        <div class="container">
+            <div class="row gy-6 d-flex justify-content-center" style="margin-top: 60px;">
+                <div class="col-12 text-center mb-4">
+                    <form method="get" id="filter-form">
+                        <div class="row align-items-center justify-content-center">
+                            <div class="col-md-2">
+                                <label for="filter-date" class="form-label">Filtrar por Data</label>
+                                <input type="date" id="filter-date" name="data" class="form-control w-100"
+                                    value="{{ data_filtro }}">
+                            </div>
+                            <div class="col-md-2 mt-4 ">
+                                <button type="submit" class="btn btn-primary">Aplicar Filtro</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <h4 class="text-center mb-1">
+                    <span class="position-relative fw-extrabold z-1" style="width: 50%;">
+                        Reservas do Dia {{ data_filtro|date:"d/m/Y" }}
+                    </span>
+                </h4>
+
+                {% for espaco, reservas_detalhadas in reservas_por_espaco.items %}
+                <div class="col-sm-6 col-lg-3 ">
+                    <div class="card border border-primary shadow-none h-100">
+                        <div class="card-body text-center" style="gap: 10px; display: flex; flex-direction: column;">
+                            <h3 class="mb-0">{{ espaco.nome }}</h3>
+                            {% if reservas_detalhadas %}
+                            {% for detalhe in reservas_detalhadas %}
+                            <span class="d-flex badge"
+                                style="background: #80808a; display: flex; flex-direction: column; text-align: center;">
+                                <div class="d-flex flex-column justify-content-center align-items-center">
+                                    <span class="lead">
+                                        {{ detalhe.reserva.turma }}
+                                    </span>
+                                    <span class="mt-3" style="display: flex; gap: 5px;">
+                                        
+        
+                                        {% for horario in detalhe.horarios %}
+        
+                                        <span class="d-flex flex-column badge btn-primary"
+                                            style=" text-align: center; gap: 10px;">
+                                            <div>{{ horario.numero_aula.numero_aula }}ª Aula - {{ horario.numero_aula.horario }}</div>
+                                        </span>
+        
+                                        {% endfor %}
+                                    </span>
+                                </div>
+                                <br>
+                            </span>
+                            {% endfor %}
+                            {% else %}
+                            <p class="fw-medium mb-0">Sem reservas</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock %}

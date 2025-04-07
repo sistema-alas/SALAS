@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@floating-ui/dom": "^1.6.12",
+    "@floating-ui/react": "^0.26.27",
+    "@floating-ui/react-dom": "^2.1.2",
+    "bootstrap": "^5.3.3",
+    "jquery": "^3.7.1"
+  }
+}

@@ -1,0 +1,176 @@
+:root{
+    --color_link: #0F3050;
+    --btn_confirm: #7B96D4;
+}
+
+
+*{
+    padding: 0;
+    margin: 0;
+    color: #fff;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    /* overflow: hidden; */
+}
+
+.ete-logo{
+    grid-area: "ete-logo";
+    text-align: center;
+    align-self: center;
+}
+.ete-logo h1{
+    color: #000;
+}
+.ete-logo h1{
+    padding: 0px 10px 0px 45px;
+    max-width: 90%;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100vh;
+    width: 100%;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background-color: #4152B2;
+    padding: 20px;
+    justify-content: space-between;
+}
+.title{
+    position: relative;
+    top: 150px;
+    text-align: center;
+}
+.inputs{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+}
+.password, .user{
+    font-size: 16px;
+    display: flex;
+    border: solid 1px #a0a0a020;
+    flex-direction: column;
+    height: 2.7rem;
+    width: 45ch;
+    padding-left: 1rem;
+    padding-right: 3rem;
+    color: #000;
+    border-radius: 30px;
+}
+.inputs input::placeholder{
+    font-weight: 700;
+}
+.inputs input:focus{
+    background-color: #ffffff20;
+    outline: none;
+    border: 2px solid #a0a0a0;
+    border-top: none;
+    border-left: none;
+    box-shadow: 1px 1px 5px #fff;
+
+}
+.inputs input:focus::placeholder{
+    color: #ffffffa0;
+}
+.recuperar-senha{
+    display: flex;
+    justify-content: space-between;
+    gap: 150px;
+    bottom: 22px;
+    position: relative;
+    
+}
+.recuperar-senha a{
+    text-decoration: none;
+    color:var(--color_link)
+}
+.button-submit{
+    border: 1px solid #a0a0a030;
+    background-color: var(--btn_confirm);
+    font-weight: 700;
+    position: relative;
+    font-size: 1.2rem;
+    bottom: 200px;
+    height: 3rem;
+    width: 9rem;
+    align-self: center;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+.button-submit:hover{
+    transform: scale(1.08);
+    box-shadow: 4px 4px 5px 2px #0000ff30;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 5px;
+    filter: brightness(1.1);
+    opacity: 20px;
+}
+.button-submit:focus{
+    transform: scale(1);
+    box-shadow: 3px 3px 2px ;
+    filter: brightness(1.2);
+}
+
+@media(max-width: 768px){
+    .container{
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 2fr;
+        grid-area: 
+        "ete-logo"
+        "form";
+        max-height: 100vh;
+        max-width: 100%;
+    }
+    .ete-logo{
+        display: flex;
+        display: grid;
+        gap: 0;
+        padding-bottom: 25px;
+    }    
+    .ete-logo img{
+        transform: scale(0.8);
+    }
+    .ete-logo h1{
+        font-size: 1.4rem;
+    }
+    form{
+        padding: 10px;
+    }
+    
+    .title{
+        top: 25px;
+
+    }
+    .password, .user{
+        max-width: 40ch;
+        font-size: 16px;
+    }
+    .button-submit{
+        bottom: 120px;
+    }
+
+}
+@media(max-width: 540px){
+    *{
+        overflow-x: hidden;
+    }
+    .recuperar-senha{
+        gap: 120px;
+    }
+    .inputs{
+        bottom: 50px;
+    }
+    .button-submit{
+        bottom: 130px;
+    }
+}

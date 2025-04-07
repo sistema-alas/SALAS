@@ -1,0 +1,261 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br" class="light-style layout-navbar-fixed layout-wide " dir="ltr" data-theme="theme-default"
+  data-assets-path="../assets/" data-template="front-pages" data-style="light">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+  <title>Reserva de Espaços</title>
+
+  <link rel="icon" type="image/x-icon" href="{% static 'assets/img/favicon/favicon.ico' %}" />
+
+  <link rel="stylesheet" href="{% static 'assets/vendor/css/rtl/core.css' %}" class="template-customizer-core-css" />
+  <link rel="stylesheet" href="{% static 'assets/vendor/css/rtl/theme-default.css' %}"
+    class="template-customizer-theme-css" />
+  <link rel="stylesheet" href="{% static 'assets/css/demo.css' %}" />
+  <link rel="stylesheet" href="{% static 'assets/vendor/css/pages/front-page.css' %}" />
+
+  <link rel="stylesheet" href="{% static 'assets/vendor/libs/nouislider/nouislider.css' %}" />
+  <link rel="stylesheet" href="{% static 'assets/vendor/libs/swiper/swiper.css' %}" />
+
+  <link rel="stylesheet" href="{% static 'assets/vendor/css/pages/front-page-landing.css' %}" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+
+
+
+  <script src="{% static 'assets/vendor/js/helpers.js' %}"></script>
+  <script src="{% static 'assets/js/front-config.js' %}"></script>
+
+
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <script src="{% static 'assets/vendor/js/dropdown-hover.js' %}"></script>
+  <script src="{% static 'assets/vendor/js/mega-dropdown.js' %}"></script>
+
+
+
+</head>
+
+<body>
+
+  <nav class="layout-navbar shadow-none py-0">
+    <div class="container">
+      <div class="navbar navbar-expand-lg landing-navbar px-3 px-md-8">
+        <div class="navbar-brand app-brand demo d-flex py-0 me-4 me-xl-8">
+          <!-- Mobile menu toggle: Start-->
+          <button class="navbar-toggler border-0 px-0 me-4" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <i class="fa fa-bars fa-2x"></i>
+          </button>
+          <!-- Mobile menu toggle: End-->
+          <a href="{% url 'index'%}" class="app-brand-link">
+            <span class="app-brand-logo demo">
+
+              <svg width="25" viewBox="0 0 25 42" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+                <defs>
+                  <path
+                    d="M13.7918663,0.358365126 L3.39788168,7.44174259 C0.566865006,9.69408886 -0.379795268,12.4788597 0.557900856,15.7960551 C0.68998853,16.2305145 1.09562888,17.7872135 3.12357076,19.2293357 C3.8146334,19.7207684 5.32369333,20.3834223 7.65075054,21.2172976 L7.59773219,21.2525164 L2.63468769,24.5493413 C0.445452254,26.3002124 0.0884951797,28.5083815 1.56381646,31.1738486 C2.83770406,32.8170431 5.20850219,33.2640127 7.09180128,32.5391577 C8.347334,32.0559211 11.4559176,30.0011079 16.4175519,26.3747182 C18.0338572,24.4997857 18.6973423,22.4544883 18.4080071,20.2388261 C17.963753,17.5346866 16.1776345,15.5799961 13.0496516,14.3747546 L10.9194936,13.4715819 L18.6192054,7.984237 L13.7918663,0.358365126 Z"
+                    id="path-1"></path>
+                  <path
+                    d="M5.47320593,6.00457225 C4.05321814,8.216144 4.36334763,10.0722806 6.40359441,11.5729822 C8.61520715,12.571656 10.0999176,13.2171421 10.8577257,13.5094407 L15.5088241,14.433041 L18.6192054,7.984237 C15.5364148,3.11535317 13.9273018,0.573395879 13.7918663,0.358365126 C13.5790555,0.511491653 10.8061687,2.3935607 5.47320593,6.00457225 Z"
+                    id="path-3"></path>
+                  <path
+                    d="M7.50063644,21.2294429 L12.3234468,23.3159332 C14.1688022,24.7579751 14.397098,26.4880487 13.008334,28.506154 C11.6195701,30.5242593 10.3099883,31.790241 9.07958868,32.3040991 C5.78142938,33.4346997 4.13234973,34 4.13234973,34 C4.13234973,34 2.75489982,33.0538207 2.37032616e-14,31.1614621 C-0.55822714,27.8186216 -0.55822714,26.0572515 -4.05231404e-15,25.8773518 C0.83734071,25.6075023 2.77988457,22.8248993 3.3049379,22.52991 C3.65497346,22.3332504 5.05353963,21.8997614 7.50063644,21.2294429 Z"
+                    id="path-4"></path>
+                  <path
+                    d="M20.6,7.13333333 L25.6,13.8 C26.2627417,14.6836556 26.0836556,15.9372583 25.2,16.6 C24.8538077,16.8596443 24.4327404,17 24,17 L14,17 C12.8954305,17 12,16.1045695 12,15 C12,14.5672596 12.1403557,14.1461923 12.4,13.8 L17.4,7.13333333 C18.0627417,6.24967773 19.3163444,6.07059163 20.2,6.73333333 C20.3516113,6.84704183 20.4862915,6.981722 20.6,7.13333333 Z"
+                    id="path-5"></path>
+                </defs>
+                <g id="g-app-brand" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g id="Brand-Logo" transform="translate(-27.000000, -15.000000)">
+                    <g id="Icon" transform="translate(30.000000, 13.000000)">
+                      <g id="Mask" transform="translate(0.000000, 8.000000)">
+                        <mask id="mask-2" fill="white">
+                          <use xlink:href="#path-1"></use>
+                        </mask>
+                        <use fill="#696cff" xlink:href="#path-1"></use>
+                        <g id="Path-3" mask="url(#mask-2)">
+                          <use fill="#696cff" xlink:href="#path-3"></use>
+                          <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-3"></use>
+                        </g>
+                        <g id="Path-4" mask="url(#mask-2)">
+                          <use fill="#696cff" xlink:href="#path-4"></use>
+                          <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-4"></use>
+                        </g>
+                      </g>
+
+                    </g>
+                  </g>
+                </g>
+              </svg></span>
+            <span class="app-brand-text demo menu-text fw-bold ms-0 ps-0">alas</span>
+          </a>
+        </div>
+
+        <div class="collapse navbar-collapse landing-nav-menu" id="navbarSupportedContent">
+          <button class="navbar-toggler border-0 text-heading position-absolute end-0 top-0 scaleX-n1-rtl p-2"
+            type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="tf-icons bx bx-x bx-lg"></i>
+          </button>
+          <!-- Remove ou substitua itens de navegação específicos aqui -->
+
+          <ul class="navbar-nav me-auto">
+            {% block nav_custom %}
+            <li class="nav-item">
+              <a class="nav-link fw-medium {% if request.resolver_match.url_name == 'index' %}active{% endif %}"
+                aria-current="page" href="{% url 'index' %}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link fw-medium {% if request.resolver_match.url_name == 'minhas_reservas' %}active{% endif %}"
+                href="{% url 'minhas_reservas' %}">Minhas Reservas</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link fw-medium {% if request.resolver_match.url_name == 'criar_reserva' %}active{% endif %}"
+                href="{% url 'criar_reserva' %}">Reservar</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link fw-medium {% if request.resolver_match.url_name == 'agenda_semanal' %} active {% endif %}"
+                href="{% url 'agenda_semanal' %}">Calendário Semanal</a>
+            </li>
+            {% if user.is_staff %}
+            <li class="nav-item">
+              <a class="nav-link fw-medium {% if request.resolver_match.url_name == 'dashboard' %} active {% endif %}"
+                href="{% url 'dashboard' %}">Dashboard</a>
+            </li>
+            {% endif %}
+
+
+            {% endblock %}
+          </ul>
+        </div>
+        <div class="landing-menu-overlay d-lg-none"></div>
+        <ul class="navbar-nav flex-row align-items-center ms-auto">
+          <li>
+            {% if user.is_authenticated %}
+            <form method="post" action="{% url 'logout' %}" style="gap: 15px; display: flex;">
+              <div class="btn-group">
+                <button type="button" class="btn btn-info dropdown-toggle hide-arrow" data-bs-toggle="dropdown"
+                  aria-expanded="false">{{ user.nome }}<span
+                    style="font-size: 0.7rem; margin-left: 9px;">▼</span></button>
+                <ul class="dropdown-menu">
+                  <li>
+                    <div class="dropdown-item" href="#" style="cursor: default;">
+                      <div class="d-flex">
+                        <div class="flex-shrink-0 me-3">
+                        </div>
+                        <div class="flex-grow-1">
+                          <small class="text-muted">{{ user.matricula }}</small>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li><a class="dropdown-item" href="{% url 'alterar_senha' %}">Alterar senha</a></li>
+
+                  <li>
+                    <hr class="dropdown-divider">
+                  </li>
+                  {% csrf_token %}
+                  <li>
+                    <a class="dropdown-item" href="javascript:void(0);">
+                      <button type="submit" style="all: unset;">Logout
+                        <img src="../static/img/log-out-outline.svg" alt="" style="width: 20%;">
+
+                      </button>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+
+
+            </form>
+            {% else %}
+            <a href="/login" class="btn btn-primary"><span class="d-none d-md-block">Login</span></a>
+            {% endif %}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  {% block content %}
+
+
+
+  {% endblock %}
+
+
+  <section id="landingContact" class="section-py bg-body landing-contact">
+    <div class="container">
+      <div class="text-center mb-4">
+        <span class="badge bg-label-primary">IMPORTANTE</span>
+      </div>
+      <h4 class="text-center mb-1">
+        <span class="position-relative fw-extrabold z-1">Regras de Uso
+          <img src="{% static 'assets/img/front-pages/icons/section-title-icon.png' %}" alt="laptop charging"
+            class="section-title-img position-absolute object-fit-contain bottom-0 z-n1">
+        </span>
+        para todos os laboratórios
+      </h4>
+      <div class="row g-12 mt-1">
+
+        <ol>
+          <li><strong>Mantenha os Espaços Limpos e Organizados:</strong> Após o uso, organize o ambiente, devolvendo
+            os móveis e materiais ao seu devido lugar.</li>
+          <li><strong>Proibição de Consumo de Alimentos e Bebidas:</strong> É proibido consumir alimentos e bebidas
+            dentro dos espaços, exceto em áreas especificamente designadas para esse fim.</li>
+          <li><strong>Respeite os Horários Reservados:</strong> Os espaços devem ser utilizados somente dentro dos
+            horários previamente reservados. Evite ultrapassar o tempo estipulado.</li>
+          <li><strong>Controle o Nível de Ruído:</strong> O ambiente deve ser silencioso ou com baixo nível de ruído,
+            a fim de garantir a convivência tranquila e sem perturbações para outros usuários.</li>
+          <li><strong>Preserve os Materiais de Uso Coletivo:</strong> Cuide e conserve os materiais e equipamentos de
+            uso coletivo, evitando danos e uso inadequado.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+  <footer class="landing-footer bg-body footer-text">
+    <div class="footer-bottom py-3 py-md-5">
+      <div class="container d-flex flex-wrap justify-content-between flex-md-row flex-column text-center text-md-start">
+        <div class="mb-2 mb-md-0">
+          <span class="footer-bottom-text">©
+            <script>
+              document.write(new Date().getFullYear());
+
+            </script>
+          </span>
+          <a href="#" target="_blank" class="text-white">ETEAVS</a>
+          <span class="footer-bottom-text"> Estudantes - 2º Módulo Subsequente</span>
+        </div>
+        <div>
+          <i class="fa fa-plus"></i>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script src="{% static 'assets/vendor/libs/popper/popper.js' %}"></script>
+  <script src="{% static 'assets/vendor/js/bootstrap.js' %}"></script>
+
+
+  <script src="{% static 'assets/vendor/libs/nouislider/nouislider.js' %}"></script>
+  <script src="{% static 'assets/vendor/libs/swiper/swiper.js' %}"></script>
+  <script src="{% static 'assets/js/front-main.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+
+</body>
+
+</html>

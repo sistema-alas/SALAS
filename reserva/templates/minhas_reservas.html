@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div data-bs-spy="scroll" class="scrollspy-example">
+
+  <section id="landingFunFacts" class="section-py landing-fun-facts">
+    <div class="container">
+      <div class="row gy-6" style="
+    margin-top: 60px; justify-content: center;
+">
+        <h1 class="text-center mb-1">Minhas Reservas</h1>
+        <h5 class="text-center mb-1">{{ data_filtro|date:"d/M/Y" }}</h5>
+        <div class="text-center mb-1">
+          <span class="position-relative fw-extrabold z-1" style="width: 50%;">
+
+            <form method="get" id="filter-form">
+              <div class="row align-items-center justify-content-center">
+                  <div class="col-md-2">
+                      <label for="filter-date" class="form-label">Filtrar por Data</label>
+                      <input type="date" id="filter-date" name="data" class="form-control w-100" value="{{ data_filtro }}">
+                  </div>
+                  <div class="col-md-2 mt-4 ">
+                      <button type="submit" class="btn btn-primary">Aplicar Filtro</button>
+                  </div>
+              </div>
+          </form>
+
+          </span>
+        </div>
+
+        {% for espaco, reservas_espaco in espacos_reservas.items %}
+        <div class="col-sm-6 col-lg-3">
+          <div class="card border border-primary shadow-none" >
+            <div class="card-body text-center" style="gap: 10px; display: flex; flex-direction: column;">
+              <h3 class="mb-0">{{ espaco.nome }}</h3>
+      
+              {% if reservas_espaco %}
+              {% for agend in reservas_espaco %}
+              <span class="d-flex badge reserva-{{ agend.id }}" style="background: #80808a; display: flex; flex-direction: column; text-align: center; position: relative;">
+                
+                <div style="text-align: center;">
+                  {{ agend.reserva.turma }} | {{ agend.reserva.data|date:"d/M" }}
+                </div>
+                <div style="text-align: center; display: flex; flex-direction: column;">
+      
+                  {% for horario in agend.horarios %}
+                  <div style="margin-top: 3px;">
+                    {{horario.numero_aula}}
+                  </div>
+                  {% endfor %}
+                  
+                  <div class="d-flex justify-content-end">
+                    {% if agend.is_future %}
+                    <button type="button" class="badge badge-center rounded-pill bg-danger cancelar-reserva"
+                      data-id="{{ agend.reserva.id }}" style="position: absolute; top: 10px; right: 10px;">
+                      X
+                    </button>
+                    {% else %}
+                    <img src="../static/img/Icon-confirmation.svg" alt="" style="width: 20px; height: 20px; opacity: 0.5; position: absolute; top: 10px; right: 10px;">
+                    {% endif %}
+                  </div>
+      
+                </div>
+      
+              </span>
+              {% endfor %}
+              {% endif %}
+      
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+      
+
+      </div>
+    </div>
+  </section>
+
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('.cancelar-reserva').on('click', function () {
+        const reservaId = $(this).data('id');  // Obtém o ID da reserva
+        const reservaContainer = $(this).closest('.reserva-{{ reservaId }}'); // Encontrar o contêiner da reserva
+
+        if (confirm('Você tem certeza que deseja cancelar esta reserva?')) {
+          $.ajax({
+            url: `/cancelar-reserva/${reservaId}/`,  // URL da rota de cancelamento
+            type: 'POST',
+            data: {
+              csrfmiddlewaretoken: '{{ csrf_token }}',  // Token CSRF
+            },
+            success: function (response) {
+              if (response.success) {
+                alert(response.message);
+                reservaContainer.remove();  // Remova o contêiner da reserva imediatamente
+              } else {
+                alert('Falha ao cancelar a reserva.');
+              }
+            },
+            error: function () {
+              alert('Erro no servidor. Tente novamente mais tarde.');
+            }
+          });
+        }
+      });
+    });
+
+  </script>
+
+  {% endblock %}

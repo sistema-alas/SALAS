@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section class="section-py">
+    <div class="container mt-5">
+        <h3 class="text-center">Agenda Semanal</h3>
+        <div id="calendar" style="max-width: 900px; margin: 0 auto;"></div>
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'timeGridWeek', 
+            locale: 'pt-br',            
+            headerToolbar: {
+                left: 'prev,next today', 
+                center: 'title',         
+                right: 'timeGridWeek,dayGridMonth' 
+            },
+            buttonText: { 
+                today: 'Hoje',   // documentação https://fullcalendar.io/docs/initialize-globals
+                month: 'Mês',
+                week: 'Semana',
+                day: 'Dia',
+                list: 'Lista'
+            },
+            events: '/eventos/',         // URL para carregar eventos
+            eventClick: function (info) {
+                alert(
+                    `Evento: ${info.event.title}\nDescrição: ${info.event.extendedProps.description}`
+                );
+            },
+            loading: function (isLoading) {
+                if (isLoading) {
+                    console.log('Carregando eventos...');
+                } else {
+                    console.log('Eventos carregados.');
+                }
+            }
+        });
+
+        calendar.render(); 
+    });
+</script>
+
+
+{% endblock %}

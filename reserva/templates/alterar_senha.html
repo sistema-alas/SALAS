@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+  <div class="card shadow-lg border-primary" style="width: 500px;">
+    <div class="card-header text-center bg-primary text-white opacity-75 mb-4">
+      <h3 class="mb-0">{{ user }}</h3>
+    </div>
+    <div class="card-body">
+      <form id="alterarSenhaForm" method="POST">
+        {% csrf_token %}
+        <div class="mb-4">
+          <label class="form-label" for="current-password">Senha Atual</label>
+          <input type="password" class="form-control" id="current-password" name="senha_atual" placeholder="Digite sua senha atual">
+          <small id="senhaAtualFeedback" class="text-danger"></small>
+        </div>
+        
+        <div class="mb-4">
+          <label class="form-label" for="new-password">Nova Senha</label>
+          <input type="password" class="form-control" id="new-password" name="nova_senha" placeholder="Digite a nova senha">
+        </div>
+        
+        <div class="mb-4">
+          <label class="form-label" for="confirm-password">Confirmar Nova Senha</label>
+          <input type="password" class="form-control" id="confirm-password" name="confirmar_senha" placeholder="Confirme a nova senha">
+        </div>
+        
+        <div class="d-grid mb-4">
+          <button type="submit" class="btn btn-primary btn-lg">Salvar</button>
+        </div>
+        
+        {% if erro %}
+        <div class="alert alert-danger">{{ erro }}</div>
+        {% elif sucesso %}
+        <div class="alert alert-success">Senha alterada com sucesso!</div>
+        {% endif %}
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  // Validação da senha atual em tempo real
+  $('#current-password').on('input', function () {
+    const senhaAtual = $(this).val();
+    const feedback = $('#senhaAtualFeedback');
+    
+    if (senhaAtual.length > 0) {
+      $.ajax({
+        url: "{% url 'validar_senha_atual' %}", // Ajuste conforme sua URL
+        type: 'POST',
+        data: {
+          senha_atual: senhaAtual,
+          csrfmiddlewaretoken: '{{ csrf_token }}'
+        },
+        success: function (response) {
+          feedback.text('');
+        },
+        error: function (xhr) {
+          feedback.text('A senha atual está incorreta.');
+        }
+      });
+    } else {
+      feedback.text('');
+    }
+  });
+
+  // Submissão do formulário
+  $('#alterarSenhaForm').on('submit', function (event) {
+    event.preventDefault();
+    this.submit();
+  });
+</script>
+{% endblock %}
