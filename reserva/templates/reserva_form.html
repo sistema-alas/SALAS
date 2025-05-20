@@ -45,22 +45,25 @@ input::-webkit-datetime-edit {
             {% csrf_token %}
 
             <!-- Espaço -->
-            <div class="mb-3">
-              <label for="espaco" class="form-label">Espaço</label>
-              <select name="espaco" id="espaco" required class="form-control">
-                <option value="">Selecione o espaço</option>
-                {% for espaco in espacos %}
-                <option value="{{ espaco.id }}">{{ espaco.nome }}</option>
-                {% endfor %}
-              </select>
+            <div class="mb-3 gap-5 d-flex justify-content-between w-75 test">
+              <div class="">
+                <label for="espaco" class="form-label">Espaço</label>
+                <select name="espaco" id="espaco" required="" class="form-control">
+                  <option value="">Selecione o espaço</option>
+                  
+                  <option value="1">Auditorio</option>
+                  
+                  <option value="2">Lab. de Informática</option>
+                  
+                </select>
+              </div>
+              <div class="">
+                <label for="data" class="form-label">Data</label>
+                <input type="date" id="data" class="form-control pr-5" name="data" required="">
+              </div>
             </div>
 
-            <!-- Data -->
-            <div class="mb-3">
-              <label for="data" class="form-label">Data</label>
-              <input type="date" id="data" class="form-control" name="data" required>
-            </div>
-
+ 
             <!-- Horários disponíveis -->
             <div class="mb-3">
               <label for="horarios" class="form-label">Horários Disponíveis</label>
