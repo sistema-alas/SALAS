@@ -276,6 +276,7 @@ def criar_reserva(request):
     espacos = Espaco.objects.filter(ativo=True)
     return render(request, 'reserva_form.html', {'horarios': horarios, 'espacos': espacos})
 
+
 def agenda_semanal_view(request):
     return render(request, 'agenda_semanal.html')
 

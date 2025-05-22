@@ -121,10 +121,6 @@
               <a class="nav-link fw-medium {% if request.resolver_match.url_name == 'criar_reserva' %}active{% endif %}"
                 href="{% url 'criar_reserva' %}">Reservar</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link fw-medium {% if request.resolver_match.url_name == 'agenda_semanal' %} active {% endif %}"
-                href="{% url 'agenda_semanal' %}">Calendário Semanal</a>
-            </li>
             {% if user.is_staff %}
             <li class="nav-item">
               <a class="nav-link fw-medium {% if request.resolver_match.url_name == 'dashboard' %} active {% endif %}"
