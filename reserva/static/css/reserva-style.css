@@ -1,0 +1,55 @@
+.test{
+    width: 75%;
+    justify-content: space-between;
+}
+.buttons{
+    justify-content: end;
+    gap: 20px;
+}
+.btn-confirm{
+    background-color:  #609cda !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 10px !important;
+    padding: 8px !important;
+}
+.btn-confirm:hover{
+    background-color:  #5190cf !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 10px !important;
+    padding: 8px !important;
+    transform: scale(1.05) !important;
+    transition: all 0.3s ease-in-out !important;
+}
+.btn-cancel{
+    background-color:  #a5a5a7 !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 10px !important;
+    padding: 8px !important;
+}
+.btn-cancel:hover{
+    background-color:  #8a8a8b !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 10px !important;
+    padding: 8px !important;
+    transform: scale(1.05) !important;
+    transition: all 0.3s ease-in-out !important;
+}
+
+@media (max-width: 600px) {
+    .test{
+        width: 100%;
+        justify-content: left;
+        gap: 50px;
+    }
+}
+@media (min-width: 992px) and (max-width: 1200px) {
+    .test{
+        width: 100%;
+        justify-content: left;
+        gap: 50px;
+    }
+}
