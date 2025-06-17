@@ -1,0 +1,53 @@
+a {
+    color: #11427a !important; /* ou qualquer outra cor desejada */
+    text-decoration: none;
+}
+
+a:hover {
+    color: #3A6092 !important; /* cor no hover */
+    text-decoration: underline;
+}
+
+
+.btn-primary {
+  color: #fff;
+  background-color: #102B49;
+  border-color: #102B49;
+  box-shadow: 0 0.125rem 0.25rem 0 rgba(16, 43, 73, 0.4); /* sombra azul escura */
+}
+
+/* Hover */
+.btn-primary:hover {
+  color: #fff !important;
+  background-color: #0b213a !important; 
+  border-color: #0b213a !important;
+}
+
+
+  /* Cor padrão dos links */
+a {
+    color: #102B49 !important;
+    text-decoration: none;
+}
+
+  /* Cor ao passar o mouse */
+a:hover,
+a:focus,
+a:active {
+    color: #3A6092 !important;
+    text-decoration: underline; /* opcional */
+}
+
+  /* Corrige possíveis pseudo-elementos com cor roxa */
+a::before,
+a::after {
+    color: #3A6092 !important;
+    background-color: transparent !important;
+    border-color: #3A6092 !important;
+}
+
+  /* Remove efeitos especiais roxos com transição */
+a {
+    transition: none !important;
+    box-shadow: none !important;
+}

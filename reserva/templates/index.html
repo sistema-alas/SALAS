@@ -2,63 +2,87 @@
 {% load static %}
 
 {% block content %}
+<style>
+    .card:hover {
+        transform: scale(1.02);
+        transition: all 0.3s ease;
+    }
+    .badge-horario {
+        cursor: pointer;
+        font-size: 0.85rem;
+        line-height: 1.2;
+    }
+</style>
 
 <div data-bs-spy="scroll" class="scrollspy-example">
     <section id="landingFunFacts" class="section-py landing-fun-facts">
         <div class="container">
-            <div class="row gy-6 d-flex justify-content-center" style="margin-top: 60px;">
+            <div class="row gy-5 d-flex justify-content-center" style="margin-top: 60px;">
+                <!-- Filtro -->
                 <div class="col-12 text-center mb-4">
                     <form method="get" id="filter-form">
-                        <div class="row align-items-center justify-content-center">
-                            <div class="col-md-2">
-                                <label for="filter-date" class="form-label">Filtrar por Data</label>
-                                <input type="date" id="filter-date" name="data" class="form-control w-100"
-                                    value="{{ data_filtro }}">
+                        <div class="row align-items-end justify-content-center g-3">
+                            <div class="col-md-3">
+                                <label for="filter-date" class="form-label fw-semibold text-primary">
+                                    <i class="bi bi-calendar-event"></i> Data
+                                </label>
+                                <input type="date" id="filter-date" name="data" class="form-control shadow-sm" value="{{ data_filtro }}">
                             </div>
-                            <div class="col-md-2 mt-4 ">
-                                <button type="submit" class="btn btn-primary">Aplicar Filtro</button>
+                            <div class="col-md-3">
+                                <label for="filter-espaco" class="form-label fw-semibold text-primary">
+                                    <i class="bi bi-building"></i> Espaço
+                                </label>
+                                <select id="filter-espaco" name="espaco" class="form-select shadow-sm">
+                                    <option value="">Todos os Espaços</option>
+                                    {% for e in espacos %}
+                                        <option value="{{ e.id }}" {% if e.id|stringformat:"s" == request.GET.espaco %}selected{% endif %}>{{ e.nome }}</option>
+
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-outline-primary w-100">
+                                    <i class="bi bi-funnel-fill"></i> Filtrar
+                                </button>
                             </div>
                         </div>
                     </form>
                 </div>
 
-                <h4 class="text-center mb-1">
-                    <span class="position-relative fw-extrabold z-1" style="width: 50%;">
-                        Reservas do Dia {{ data_filtro|date:"d/m/Y" }}
-                    </span>
+                <!-- Título -->
+                <h4 class="text-center fw-bold mb-4 text-dark">
+                    <i class="bi bi-calendar-check"></i> Reservas do Dia {{ data_filtro|date:"d/m/Y" }}
                 </h4>
 
+                <!-- Cards -->
                 {% for espaco, reservas_detalhadas in reservas_por_espaco.items %}
-                <div class="col-sm-6 col-lg-3 ">
-                    <div class="card border border-primary shadow-none h-100">
-                        <div class="card-body text-center" style="gap: 10px; display: flex; flex-direction: column;">
-                            <h3 class="mb-0">{{ espaco.nome }}</h3>
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="card h-100 shadow-sm border-0 rounded-4" style="background-color: #f9f9fb;">
+                        <div class="card-body text-center d-flex flex-column gap-3">
+                            <h5 class="card-title fw-bold text-primary">
+                                <i class="bi bi-door-open"></i> {{ espaco.nome }}
+                            </h5>
+
                             {% if reservas_detalhadas %}
-                            {% for detalhe in reservas_detalhadas %}
-                            <span class="d-flex badge"
-                                style="background: #80808a; display: flex; flex-direction: column; text-align: center;">
-                                <div class="d-flex flex-column justify-content-center align-items-center">
-                                    <span class="lead">
-                                        {{ detalhe.reserva.turma }}
+                                {% for detalhe in reservas_detalhadas %}
+                                <div class="bg-light rounded-3 p-3 border text-start shadow-sm">
+                                    <span class="fw-semibold text-secondary">
+                                        <i class="bi bi-people-fill"></i> {{ detalhe.reserva.turma }}
                                     </span>
-                                    <span class="mt-3" style="display: flex; gap: 5px;">
-                                        
-        
+                                    <div class="mt-2 d-flex flex-wrap gap-2 justify-content-center">
                                         {% for horario in detalhe.horarios %}
-        
-                                        <span class="d-flex flex-column badge btn-primary"
-                                            style=" text-align: center; gap: 10px;">
-                                            <div>{{ horario.numero_aula.numero_aula }}ª Aula - {{ horario.numero_aula.horario }}</div>
+                                        <span class="badge rounded-pill bg-primary text-white shadow-sm px-3 py-2 badge-horario"
+                                            data-bs-toggle="tooltip"
+                                            data-bs-placement="top"
+                                            title="Horário: {{ horario.numero_aula.horario }}">
+                                            <i class="bi bi-clock"></i> {{ horario.numero_aula.numero_aula }}ª Aula
                                         </span>
-        
                                         {% endfor %}
-                                    </span>
+                                    </div>
                                 </div>
-                                <br>
-                            </span>
-                            {% endfor %}
+                                {% endfor %}
                             {% else %}
-                            <p class="fw-medium mb-0">Sem reservas</p>
+                                <p class="text-muted mt-3">Sem reservas</p>
                             {% endif %}
                         </div>
                     </div>
@@ -68,5 +92,11 @@
         </div>
     </section>
 </div>
+
+<!-- Tooltip Bootstrap Init -->
+<script>
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    tooltipTriggerList.forEach(t => new bootstrap.Tooltip(t))
+</script>
 
 {% endblock %}

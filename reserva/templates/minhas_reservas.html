@@ -2,112 +2,145 @@
 {% load static %}
 {% block content %}
 
-<div data-bs-spy="scroll" class="scrollspy-example">
+  <!-- Bootstrap Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 
+<style>
+  .card:hover {
+    transform: scale(1.02);
+    transition: all 0.3s ease;
+  }
+  .badge-horario {
+    font-size: 0.85rem;
+  }
+  .btn-cancelar {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    background: transparent;
+    color: #dc3545;
+  }
+</style>
+
+<div data-bs-spy="scroll" class="scrollspy-example">
   <section id="landingFunFacts" class="section-py landing-fun-facts">
     <div class="container">
-      <div class="row gy-6" style="
-    margin-top: 60px; justify-content: center;
-">
-        <h1 class="text-center mb-1">Minhas Reservas</h1>
-        <h5 class="text-center mb-1">{{ data_filtro|date:"d/M/Y" }}</h5>
-        <div class="text-center mb-1">
-          <span class="position-relative fw-extrabold z-1" style="width: 50%;">
+      <div class="row gy-5 justify-content-center" style="margin-top: 60px;">
+        
+        <h2 class="text-center fw-bold text-primary">Minhas Reservas</h2>
+        <h6 class="text-center text-muted mb-4">{{ data_filtro|date:"d/M/Y" }}</h6>
 
-            <form method="get" id="filter-form">
-              <div class="row align-items-center justify-content-center">
-                  <div class="col-md-2">
-                      <label for="filter-date" class="form-label">Filtrar por Data</label>
-                      <input type="date" id="filter-date" name="data" class="form-control w-100" value="{{ data_filtro }}">
-                  </div>
-                  <div class="col-md-2 mt-4 ">
-                      <button type="submit" class="btn btn-primary">Aplicar Filtro</button>
-                  </div>
+        <!-- Filtro -->
+        <div class="col-12 text-center mb-3">
+          <form method="get" id="filter-form">
+            <div class="row align-items-end justify-content-center g-3">
+              <div class="col-md-3">
+                <label for="filter-date" class="form-label fw-semibold text-primary">
+                  <i class="bi bi-calendar-event"></i> Data
+                </label>
+                <input type="date" id="filter-date" name="data" class="form-control shadow-sm" value="{{ data_filtro }}">
               </div>
+              <div class="col-md-2">
+                <button type="submit" class="btn btn-outline-primary w-100">
+                  <i class="bi bi-funnel"></i> Filtrar
+                </button>
+              </div>
+            </div>
           </form>
-
-          </span>
         </div>
 
         {% for espaco, reservas_espaco in espacos_reservas.items %}
-        <div class="col-sm-6 col-lg-3">
-          <div class="card border border-primary shadow-none" >
-            <div class="card-body text-center" style="gap: 10px; display: flex; flex-direction: column;">
-              <h3 class="mb-0">{{ espaco.nome }}</h3>
-      
+        <div class="col-sm-6 col-lg-4">
+          <div class="card border-0 shadow-sm rounded-4 h-100 bg-light">
+            <div class="card-body text-center d-flex flex-column gap-3 position-relative">
+              <!-- Ícone por ambiente -->
+              <h5 class="fw-bold text-primary">
+                {% if "laboratório" in espaco.nome|lower %}
+                  <i class="bi bi-cpu fs-4 text-success me-1"></i>
+                {% elif "auditório" in espaco.nome|lower %}
+                  <i class="bi bi-mic fs-4 text-warning me-1"></i>
+                {% elif "biblioteca" in espaco.nome|lower %}
+                  <i class="bi bi-book fs-4 text-danger me-1"></i>
+                {% elif "reunião" in espaco.nome|lower %}
+                  <i class="bi bi-people fs-4 text-info me-1"></i>
+                {% elif "sala" in espaco.nome|lower %}
+                  <i class="bi bi-easel fs-4 text-primary me-1"></i>
+                {% else %}
+                  <i class="bi bi-building fs-4 text-muted me-1"></i>
+                {% endif %}
+                {{ espaco.nome }}
+              </h5>
+
               {% if reservas_espaco %}
               {% for agend in reservas_espaco %}
-              <span class="d-flex badge reserva-{{ agend.id }}" style="background: #80808a; display: flex; flex-direction: column; text-align: center; position: relative;">
-                
-                <div style="text-align: center;">
-                  {{ agend.reserva.turma }} | {{ agend.reserva.data|date:"d/M" }}
+              <div class="bg-white border rounded-3 p-3 position-relative shadow-sm reserva-box" data-id="{{ agend.reserva.id }}">
+                <div class="text-secondary mb-1">
+                  <i class="bi bi-people-fill"></i> {{ agend.reserva.turma }}<br>
+                  <i class="bi bi-calendar3"></i> {{ agend.reserva.data|date:"d/M" }}
                 </div>
-                <div style="text-align: center; display: flex; flex-direction: column;">
-      
+
+                <div class="d-flex flex-wrap justify-content-center gap-2 mt-2">
                   {% for horario in agend.horarios %}
-                  <div style="margin-top: 3px;">
-                    {{horario.numero_aula}}
-                  </div>
+                  <span class="badge bg-primary text-white badge-horario">
+                    <i class="bi bi-clock"></i> {{ horario.numero_aula }}
+                  </span>
                   {% endfor %}
-                  
-                  <div class="d-flex justify-content-end">
-                    {% if agend.is_future %}
-                    <button type="button" class="badge badge-center rounded-pill bg-danger cancelar-reserva"
-                      data-id="{{ agend.reserva.id }}" style="position: absolute; top: 10px; right: 10px;">
-                      X
-                    </button>
-                    {% else %}
-                    <img src="../static/img/Icon-confirmation.svg" alt="" style="width: 20px; height: 20px; opacity: 0.5; position: absolute; top: 10px; right: 10px;">
-                    {% endif %}
-                  </div>
-      
                 </div>
-      
-              </span>
+
+                {% if agend.is_future %}
+                  <button class="btn-cancelar cancelar-reserva" title="Cancelar reserva" data-id="{{ agend.reserva.id }}">
+                    <i class="bi bi-x-circle-fill fs-5"></i>
+                  </button>
+                {% else %}
+                  <img src="../static/img/Icon-confirmation.svg" alt="Confirmado"
+                    style="width: 22px; height: 22px; opacity: 0.6; position: absolute; top: 10px; right: 10px;">
+                {% endif %}
+              </div>
               {% endfor %}
+              {% else %}
+              <p class="text-muted">Sem reservas</p>
               {% endif %}
-      
             </div>
           </div>
         </div>
-      {% endfor %}
-      
+        {% endfor %}
 
       </div>
     </div>
   </section>
+</div>
 
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $('.cancelar-reserva').on('click', function () {
+      const reservaId = $(this).data('id');
+      const reservaBox = $(`.reserva-box[data-id="${reservaId}"]`);
 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    $(document).ready(function () {
-      $('.cancelar-reserva').on('click', function () {
-        const reservaId = $(this).data('id');  // Obtém o ID da reserva
-        const reservaContainer = $(this).closest('.reserva-{{ reservaId }}'); // Encontrar o contêiner da reserva
-
-        if (confirm('Você tem certeza que deseja cancelar esta reserva?')) {
-          $.ajax({
-            url: `/cancelar-reserva/${reservaId}/`,  // URL da rota de cancelamento
-            type: 'POST',
-            data: {
-              csrfmiddlewaretoken: '{{ csrf_token }}',  // Token CSRF
-            },
-            success: function (response) {
-              if (response.success) {
-                alert(response.message);
-                reservaContainer.remove();  // Remova o contêiner da reserva imediatamente
-              } else {
-                alert('Falha ao cancelar a reserva.');
-              }
-            },
-            error: function () {
-              alert('Erro no servidor. Tente novamente mais tarde.');
+      if (confirm('Você tem certeza que deseja cancelar esta reserva?')) {
+        $.ajax({
+          url: `/cancelar-reserva/${reservaId}/`,
+          type: 'POST',
+          data: {
+            csrfmiddlewaretoken: '{{ csrf_token }}',
+          },
+          success: function (response) {
+            if (response.success) {
+              alert(response.message);
+              reservaBox.fadeOut(300, () => reservaBox.remove());
+            } else {
+              alert('Falha ao cancelar a reserva.');
             }
-          });
-        }
-      });
+          },
+          error: function () {
+            alert('Erro no servidor. Tente novamente mais tarde.');
+          }
+        });
+      }
     });
-
-  </script>
+  });
+</script>
 
   {% endblock %}

@@ -66,14 +66,19 @@ from datetime import date
 def index_view(request):
     espacos = Espaco.objects.all()
     reservas_por_espaco = {}
-    
-    # Obter a data do filtro ou usar a data de hoje
+
+    # Data do filtro ou hoje
     data_filtro = request.GET.get('data', date.today())
     if isinstance(data_filtro, str):
         try:
             data_filtro = date.fromisoformat(data_filtro)
         except ValueError:
-            data_filtro = date.today()  # Voltar para a data atual se houver erro
+            data_filtro = date.today()
+
+    # Novo: pega o filtro de espaço (se houver)
+    espaco_filtro = request.GET.get('espaco')
+    if espaco_filtro:
+        espacos = espacos.filter(id=espaco_filtro)
 
     for espaco in espacos:
         reservas = Reserva.objects.filter(espaco=espaco, data=data_filtro).order_by('data')
@@ -87,7 +92,7 @@ def index_view(request):
         reservas_por_espaco[espaco] = reservas_detalhadas
 
     context = {
-        'espacos': espacos,
+        'espacos': Espaco.objects.all(),  # mantém todos no <select>
         'reservas_por_espaco': reservas_por_espaco,
         'data_filtro': data_filtro,
     }

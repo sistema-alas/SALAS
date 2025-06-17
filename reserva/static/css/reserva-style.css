@@ -2,6 +2,50 @@
     width: 75%;
     justify-content: space-between;
 }
+
+
+.light-style .layout-navbar .navbar.landing-navbar .navbar-nav .nav-link.active {
+  color: #102B49 !important; /* azul escuro ou outra cor desejada */
+}
+
+.light-style .layout-navbar .navbar.landing-navbar .navbar-nav .nav-link:hover,
+.light-style .layout-navbar .navbar.landing-navbar .navbar-nav .nav-link:focus {
+    color: #6fb2ff !important;
+}
+
+.text-primary {                              /* class para mudar o cor da fonte dos nomes */
+    color: #0f169f !important; 
+}
+
+.btn-outline-primary {                              /* Botaõ de filtro*/
+    color: #102B49 !important;
+    border-color: #102B49 !important;
+}
+
+.btn-outline-primary:hover {                    /* hover do Botaõ de filtro*/
+    background-color: #102B49 !important;
+    color: #ffffff !important;
+}
+
+.bg-primary {
+    background-color: #0d077d !important;
+}                                                   /*span que mostra a aula dentro do card*/
+
+
+
+.btn.botao-personalizado,
+.btn.botao-personalizado:focus,
+.btn.botao-personalizado:active,
+.btn.botao-personalizado:visited {
+    background-color: #3A6092 !important;
+    color: white !important;
+    border: none !important;
+}
+
+.btn.botao-personalizado:hover {
+    background-color: #2d4b71 !important;
+    color: white !important;
+}
 .buttons{
     justify-content: end;
     gap: 20px;
@@ -38,6 +82,7 @@
     transform: scale(1.05) !important;
     transition: all 0.3s ease-in-out !important;
 }
+
 
 @media (max-width: 600px) {
     .test{
