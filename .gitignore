@@ -1,0 +1,9 @@
+# Ignora o ambiente virtual
+.venv/
+
+# Ignora arquivos de cache do Python
+__pycache__/
+*.pyc
+
+# Ignora o banco de dados local SQLite (se não quiser versionar)
+db.sqlite3
