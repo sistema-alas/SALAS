@@ -1,10 +1,17 @@
 # Ignora o ambiente virtual
 .venv/
+<<<<<<< HEAD
 venv/
+=======
+>>>>>>> 58a69c7467ccefd2444dacebd88b6dfd583f7a9d
 
 # Ignora arquivos de cache do Python
 __pycache__/
 *.pyc
 
 # Ignora o banco de dados local SQLite (se não quiser versionar)
+<<<<<<< HEAD
 db.sqlite3
+=======
+db.sqlite3
+>>>>>>> 58a69c7467ccefd2444dacebd88b6dfd583f7a9d
