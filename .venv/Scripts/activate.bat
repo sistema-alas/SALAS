@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\rober\OneDrive\Documentos\curso.PI\projeto.pi\SALAS\.venv
+set VIRTUAL_ENV=C:\Users\Alvaro Santos\Documents\GitHub\SALAS(md3)\SALAS\.venv
 
 if not defined PROMPT set PROMPT=$P$G
 

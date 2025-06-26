@@ -11,16 +11,16 @@ a:hover {
 
 .btn-primary {
   color: #fff;
-  background-color: #102B49;
-  border-color: #102B49;
+  background-color: #609CDA;
+  border-color: #609CDA;
   box-shadow: 0 0.125rem 0.25rem 0 rgba(16, 43, 73, 0.4); /* sombra azul escura */
 }
 
 /* Hover */
 .btn-primary:hover {
   color: #fff !important;
-  background-color: #0b213a !important; 
-  border-color: #0b213a !important;
+  background-color: #588fc5 !important; 
+  border-color: #588fc5 !important;
 }
 
 

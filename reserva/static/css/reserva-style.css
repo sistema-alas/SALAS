@@ -10,26 +10,33 @@
 
 .light-style .layout-navbar .navbar.landing-navbar .navbar-nav .nav-link:hover,
 .light-style .layout-navbar .navbar.landing-navbar .navbar-nav .nav-link:focus {
-    color: #6fb2ff !important;
+    color: #334254 !important;
 }
 
 .text-primary {                              /* class para mudar o cor da fonte dos nomes */
-    color: #0f169f !important; 
+    color: #102B49 !important; 
 }
 
-.btn-outline-primary {                              /* Botaõ de filtro*/
-    color: #102B49 !important;
-    border-color: #102B49 !important;
+.btn-outline-primary {                              /* Botaõ de filtros e login no canto superior direito*/
+    color: #ffffff !important;
+    background-color: #609CDA !important;
+    border-color: #609CDA !important;
+    
 }
 
 .btn-outline-primary:hover {                    /* hover do Botaõ de filtro*/
-    background-color: #102B49 !important;
+    background-color: #588fc5 !important;
+    border-color: #588fc5 !important;
     color: #ffffff !important;
 }
 
 .bg-primary {
-    background-color: #0d077d !important;
+    background-color: #3A6092 !important;
 }                                                   /*span que mostra a aula dentro do card*/
+
+.bg-secundary {
+    background-color: #102B49 !important;
+}                                                   /*cor de fundo do título do card de mudar senha*/
 
 
 
@@ -37,13 +44,13 @@
 .btn.botao-personalizado:focus,
 .btn.botao-personalizado:active,
 .btn.botao-personalizado:visited {
-    background-color: #3A6092 !important;
+    background-color: #609CDA !important;
     color: white !important;
     border: none !important;
 }
 
 .btn.botao-personalizado:hover {
-    background-color: #2d4b71 !important;
+    background-color: #588fc5 !important;
     color: white !important;
 }
 .buttons{
@@ -51,14 +58,14 @@
     gap: 20px;
 }
 .btn-confirm{
-    background-color:  #609cda !important;
+    background-color:  #609CDA !important;
     color: white !important;
     border: none !important;
     border-radius: 10px !important;
     padding: 8px !important;
 }
 .btn-confirm:hover{
-    background-color:  #5190cf !important;
+    background-color:  #588fc5 !important;
     color: white !important;
     border: none !important;
     border-radius: 10px !important;
@@ -67,7 +74,7 @@
     transition: all 0.3s ease-in-out !important;
 }
 .btn-cancel{
-    background-color:  #a5a5a7 !important;
+    background-color:  #929292 !important;
     color: white !important;
     border: none !important;
     border-radius: 10px !important;
